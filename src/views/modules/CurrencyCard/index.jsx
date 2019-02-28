@@ -6,6 +6,7 @@ import Button from 'views/ui-kit/Button'
 
 import CurrencyItem from './Components/CurrencyItem'
 import AddCurrency from './Components/AddCurrency'
+
 import currencyOption from './Utils/currencyOption'
 
 class CurrencyCard extends PureComponent {
@@ -14,13 +15,18 @@ class CurrencyCard extends PureComponent {
 
     this.state = {
       baseCurrency: {
-        id: 'USD',
+        code: 'USD',
         name: 'United States dollar'
       },
       currencyValue: 10.00,
       isAddCurrencyOpen: false,
-      selectedCurrency: currencyOption[0].id,
-      currencyList: [],
+      selectedCurrency: currencyOption[0].code,
+      currencyList: [{
+        id: 1,
+        code: 'IDR',
+        name: 'Indonesian rupiah',
+        rates: 14000
+      }],
     }
   }
 
@@ -47,8 +53,24 @@ class CurrencyCard extends PureComponent {
     this.setState({ selectedCurrency: value })
   }
 
+  /**
+   * Hanle add currency options
+   */
   handleAddCurrency = () => {
+    const { selectedCurrency } = this.state
+    const currency = currencyOption.find(currency => currency.code === selectedCurrency)
 
+    this.setState(prevState => ({
+      currencyList: [
+        ...prevState.currencyList,
+        {
+          id: prevState.currencyList.length + 1,
+          code: currency.code,
+          name: currency.name,
+          rates: 14000
+        }
+      ]
+    }))
   }
 
   render () {
@@ -56,15 +78,16 @@ class CurrencyCard extends PureComponent {
       baseCurrency,
       currencyValue,
       isAddCurrencyOpen,
-      selectedCurrency
+      selectedCurrency,
+      currencyList
     } = this.state
 
     return (
       <Card
-        title={`${baseCurrency.id} - ${baseCurrency.name}`}
+        title={`${baseCurrency.code} - ${baseCurrency.name}`}
         meta={
           <Input
-            label={`${baseCurrency.id}`}
+            label={`${baseCurrency.code}`}
             type="number"
             placeholder="Enter the value of currency"
             value={currencyValue}
@@ -72,7 +95,15 @@ class CurrencyCard extends PureComponent {
           />
         }
       >
-        <CurrencyItem />
+        {currencyList.length !== 0 && (
+          currencyList.map((currency, index) => (
+            <CurrencyItem
+              key={index + 1}
+              currency={currency}
+              currencyValue={currencyValue}
+            />
+          ))
+        )}
         {isAddCurrencyOpen && (
           <AddCurrency
             selectedCurrency={selectedCurrency}

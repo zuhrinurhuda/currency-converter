@@ -3,18 +3,19 @@ import PropTypes from 'prop-types'
 
 const CurrencyItem = React.memo(props => {
   const {
-
+    currency,
+    currencyValue
   } = props
 
   return (
     <div>
       <div>
         <div>
-          <div>IDR</div>
-          <div>140,000.00</div>
+          <div>{currency.code}</div>
+          <div>{currencyValue * currency.rates}</div>
         </div>
-        <div>IDR - Indonesian Rupiah</div>
-        <div>1 USD = IDR 14,000.00</div>
+        <div>{`${currency.code} - ${currency.name}`}</div>
+        <div>{`1 USD = ${currency.code} ${currency.rates}`}</div>
       </div>
       <div>
         <button>-</button>
@@ -23,12 +24,9 @@ const CurrencyItem = React.memo(props => {
   )
 })
 
-CurrencyItem.defaultProps = {
-
-}
-
 CurrencyItem.propTypes = {
-
+  currency: PropTypes.objectOf(PropTypes.any).isRequired,
+  currencyValue: PropTypes.number.isRequired
 }
 
 export default CurrencyItem

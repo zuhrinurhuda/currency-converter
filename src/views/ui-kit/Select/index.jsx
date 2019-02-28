@@ -5,14 +5,16 @@ const Select = React.memo(props => {
   const {
     value,
     onChange,
-    options
+    options,
+    valueKey,
+    nameKey
   } = props
 
   return (
     <select value={value} onChange={onChange}>
-      {options.map(item => (
-        <option key={item.id} value={item.id}>
-          {item.id}
+      {options.map((item, index) => (
+        <option key={index + 1} value={item[valueKey]}>
+          {item[nameKey]}
         </option>
       ))}
     </select>
@@ -21,13 +23,17 @@ const Select = React.memo(props => {
 
 Select.defaultProps = {
   value: '',
-  options: []
+  options: [],
+  valueKey: 'value',
+  nameKey: 'name'
 }
 
 Select.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  options: PropTypes.arrayOf(PropTypes.object)
+  options: PropTypes.arrayOf(PropTypes.object),
+  valueKey: PropTypes.string,
+  nameKey: PropTypes.string
 }
 
 export default Select

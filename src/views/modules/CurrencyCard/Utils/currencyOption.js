@@ -1,37 +1,37 @@
 const currencyOption = [{
-  id: "CAD",
+  code: "CAD",
   name: "Canadian dollar"
 },
 {
-  id: "IDR",
+  code: "IDR",
   name: "Indonesian rupiah"
 },
 {
-  id: "GBP",
+  code: "GBP",
   name: "Pound sterling"
 },
 {
-  id: "CHF",
+  code: "CHF",
   name: "Swiss franc"
 },
 {
-  id: "SGD",
+  code: "SGD",
   name: "Singapore dollar"
 },
 {
-  id: "INR",
+  code: "INR",
   name: "Indian rupee"
 },
 {
-  id: "MYR",
+  code: "MYR",
   name: "Malaysian ringgit"
 },
 {
-  id: "JPY",
+  code: "JPY",
   name: "Japanese yen"
 },
 {
-  id: "KRW",
+  code: "KRW",
   name: "South Korean won"
 }]
 

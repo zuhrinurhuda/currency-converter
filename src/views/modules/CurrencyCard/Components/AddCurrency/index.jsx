@@ -18,6 +18,8 @@ const AddCurrency = React.memo(props => {
         value={selectedCurrency}
         onChange={handleSelectChange}
         options={currencyOption}
+        valueKey="code"
+        nameKey="code"
       />
       <Button onClick={handleAddCurrency}>
         Add
@@ -26,12 +28,11 @@ const AddCurrency = React.memo(props => {
   )
 })
 
-AddCurrency.defaultProps = {
-
-}
-
 AddCurrency.propTypes = {
-
+  selectedCurrency: PropTypes.string.isRequired,
+  handleSelectChange: PropTypes.func.isRequired,
+  currencyOption: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleAddCurrency: PropTypes.func.isRequired
 }
 
 export default AddCurrency
