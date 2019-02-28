@@ -2,13 +2,25 @@ import React, { PureComponent } from 'react'
 
 import Card from 'views/ui-kit/Card'
 import Input from 'views/ui-kit/Input'
+import Button from 'views/ui-kit/Button'
+
+import CurrencyItem from './Components/CurrencyItem'
+import AddCurrency from './Components/AddCurrency'
+import currencyOption from './Utils/currencyOption'
 
 class CurrencyCard extends PureComponent {
   constructor() {
     super()
 
     this.state = {
-      currencyValue: 10.00
+      baseCurrency: {
+        id: 'USD',
+        name: 'United States dollar'
+      },
+      currencyValue: 10.00,
+      isAddCurrencyOpen: false,
+      selectedCurrency: currencyOption[0].id,
+      currencyList: [],
     }
   }
 
@@ -20,17 +32,39 @@ class CurrencyCard extends PureComponent {
     this.setState({ currencyValue: value })
   }
 
+  /**
+   * Handle displays the add currency button
+   */
+  handleShowAddCurrency = () => {
+    this.setState({ isAddCurrencyOpen: true })
+  }
+
+  /**
+   * Handle choose currency from select option
+   * @param {string} value - The id of the currency
+   */
+  handleSelectChange = ({ target: { value } }) => {
+    this.setState({ selectedCurrency: value })
+  }
+
+  handleAddCurrency = () => {
+
+  }
+
   render () {
     const {
-      currencyValue
+      baseCurrency,
+      currencyValue,
+      isAddCurrencyOpen,
+      selectedCurrency
     } = this.state
 
     return (
       <Card
-        title="USD - United States Dollar"
+        title={`${baseCurrency.id} - ${baseCurrency.name}`}
         meta={
           <Input
-            label="USD"
+            label={`${baseCurrency.id}`}
             type="number"
             placeholder="Enter the value of currency"
             value={currencyValue}
@@ -38,6 +72,18 @@ class CurrencyCard extends PureComponent {
           />
         }
       >
+        <CurrencyItem />
+        {isAddCurrencyOpen && (
+          <AddCurrency
+            selectedCurrency={selectedCurrency}
+            handleSelectChange={this.handleSelectChange}
+            currencyOption={currencyOption}
+            handleAddCurrency={this.handleAddCurrency}
+          />
+        )}
+        <Button onClick={this.handleShowAddCurrency}>
+          Add More Currencies
+        </Button>
       </Card>
     )
   }
