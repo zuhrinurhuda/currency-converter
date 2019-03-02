@@ -1,10 +1,10 @@
 import React from 'react'
 
-import CurrencyCard from 'views/modules/CurrencyCard'
+import Currency from 'views/modules/Currency'
 
 const Home = React.memo(() => {
   return (
-    <CurrencyCard />
+    <Currency />
   )
 })
 

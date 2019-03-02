@@ -1,0 +1,1 @@
+export const GET_CURRENCY_RATES = 'GET_CURRENCY_RATES'

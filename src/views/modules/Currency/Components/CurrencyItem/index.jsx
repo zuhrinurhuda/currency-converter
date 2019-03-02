@@ -1,10 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import Button from 'views/ui-kit/Button'
+
 const CurrencyItem = React.memo(props => {
   const {
     currency,
-    currencyValue
+    currencyValue,
+    handleDeleteCurrency
   } = props
 
   return (
@@ -18,7 +21,9 @@ const CurrencyItem = React.memo(props => {
         <div>{`1 USD = ${currency.code} ${currency.rates}`}</div>
       </div>
       <div>
-        <button>-</button>
+        <Button onClick={handleDeleteCurrency(currency.id)}>
+          -
+        </Button>
       </div>
     </div>
   )
@@ -26,7 +31,8 @@ const CurrencyItem = React.memo(props => {
 
 CurrencyItem.propTypes = {
   currency: PropTypes.objectOf(PropTypes.any).isRequired,
-  currencyValue: PropTypes.number.isRequired
+  currencyValue: PropTypes.number.isRequired,
+  handleDeleteCurrency: PropTypes.func.isRequired
 }
 
 export default CurrencyItem
